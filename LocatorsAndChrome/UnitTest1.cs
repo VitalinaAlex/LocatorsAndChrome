@@ -13,15 +13,15 @@ namespace LocatorsAndChrome
         private const string email = "_vitalina@ukr.net";
         private const string login = "autotest001@ukr.net";
         private const string password = "001autotest";
-        //By.XPath("//input[@name='login']"
         private readonly By InputLogin = By.Name("login");
         private readonly By InputPassword = By.Name("password");
         private readonly By SignInButton = By.XPath("//button[@type='submit']");
         private readonly By ComposeLetterButton = By.XPath("//button[contains(text(),'Compose')]");
         private readonly By InputToButton = By.XPath("//input[@name='toFieldInput']");
         private readonly By InputSubjectButton = By.XPath("//input[@name='subject']");
-        private readonly By InputLetterText = By.Id("editLinkBlock");
+        private readonly By InputLetterText = By.XPath("//textarea[@class='mce-plaintext-area']");
         private readonly By SendButton = By.XPath("//button[(text()='Send')]");
+            //button[(text()='Send')]");
 
 
         [SetUp]
@@ -41,10 +41,9 @@ namespace LocatorsAndChrome
                 driver.FindElement(ComposeLetterButton).Click();
                 driver.FindElement(InputToButton).SendKeys(email);
                 driver.FindElement(InputSubjectButton).SendKeys("Test");
-            /*                IWebElement LetterText = driver.FindElement(InputLetterText);
-
-                        Thread.Sleep(1500);
-                        LetterText.SendKeys("Test letter");*/
+            IWebElement ClickFrame = driver.FindElement(InputLetterText);
+            ClickFrame.Click();
+            ClickFrame.SendKeys("Test letter");
             driver.FindElement(SendButton).Click();
         }
 
